@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test popup</title>
+
+    <style>
+      body {
+        position: relative;
+        font-family: Arial, sans-serif;
+        background-color: #fff0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .popup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 440px;
+        max-height: 266px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        padding: 32px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 16px;
+        box-sizing: border-box;
+        transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+      }
+
+      .popup.hide {
+        transform: translate(-100%, -50%);
+        opacity: 0;
+      }
+
+      .popup-content {
+        display: flex;
+        justify-content: space-between;
+        gap: 32px;
+      }
+
+      .popup-text {
+        flex: 1;
+      }
+
+      h1 {
+        margin: 0;
+        margin-bottom: 20px;
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      p {
+        font-size: 16px;
+        color: #555;
+        line-height: 140%;
+        margin: 0;
+      }
+
+      .popup-buttons {
+        display: flex;
+        gap: 16px;
+        width: 100%;
+      }
+
+      .secondary-btn,
+      .primary-btn {
+        width: 100%;
+        border: none;
+        padding: 10px 15px;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      .secondary-btn {
+        background: white;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+      }
+
+      .primary-btn {
+        background: black;
+        color: white;
+      }
+
+      .close-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 24px;
+        height: 24px;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        background: #e5e5e5;
+        border-radius: 50%;
+      }
+
+      .popup-image img {
+        width: 154px;
+      }
+
+      @media screen and (max-width: 550px) {
+        .popup {
+          max-height: max-content;
+          height: 100%;
+          max-width: 340px;
+          width: 100%;
+          padding: 32px 16px;
+        }
+
+        .popup-content {
+          text-align: center;
+          flex-direction: column;
+          gap: 16px;
+        }
+        .popup-text {
+          max-width: 180px;
+        }
+
+        .close-btn {
+          top: 5px;
+          right: 5px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+
+        <div class="popup-text">
+          <h1>Are you ready?</h1>
+          <p>Discover the world of trading and learn about upcoming events</p>
+        </div>
+
+        <div class="popup-image">
+          <img src="https://i.ibb.co/Fb3b2YTw/calendar.png" alt="Calendar" />
+        </div>
+      </div>
+      <div class="popup-buttons">
+        <button class="secondary-btn" onclick="closePopup()">
+          I’ll do it later
+        </button>
+        <button class="primary-btn" onclick="redirectToGoogle()">
+          Let’s start!
+        </button>
+      </div>
+    </div>
+
+    <script>
+      function closePopup() {
+        const popup = document.getElementById("popup");
+        popup.classList.add("hide");
+
+        setTimeout(() => {
+          popup.style.display = "none";
+        }, 400);
+      }
+
+      function redirectToGoogle() {
+        window.location.href = "https://www.google.com";
+      }
+    </script>
+  </body>
+</html>
