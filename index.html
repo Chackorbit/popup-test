@@ -92,7 +92,7 @@
         color: white;
       }
 
-      .close-btn {
+      .closePopup-btn {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -130,7 +130,7 @@
           max-width: 180px;
         }
 
-        .close-btn {
+        .closePopup-btn {
           top: 5px;
           right: 5px;
         }
@@ -141,7 +141,7 @@
   <body>
     <div id="popup" class="popup">
       <div class="popup-content">
-        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <span class="close-btn closePopup-btn">&times;</span>
 
         <div class="popup-text">
           <h1>Are you ready?</h1>
@@ -153,28 +153,26 @@
         </div>
       </div>
       <div class="popup-buttons">
-        <button class="secondary-btn" onclick="closePopup()">
-          I’ll do it later
-        </button>
-        <button class="primary-btn" onclick="redirectToGoogle()">
-          Let’s start!
-        </button>
+        <button class="close-btn secondary-btn">I’ll do it later</button>
+        <button class="primary-btn cta-btn">Let’s start!</button>
       </div>
     </div>
 
     <script>
-      function closePopup() {
-        const popup = document.getElementById("popup");
-        popup.classList.add("hide");
-
-        setTimeout(() => {
-          popup.style.display = "none";
-        }, 400);
-      }
-
-      function redirectToGoogle() {
-        window.location.href = "https://www.google.com";
-      }
+      document.querySelectorAll(".close-btn").forEach((btn) => {
+        btn.onclick = () => {
+          if (parent.$solitics) {
+            parent.$solitics.hidePopup();
+          }
+        };
+      });
+      document.querySelector(".cta-btn").onclick = () => {
+        if (parent.$solitics) {
+          const customFields = { message: "validation_page" };
+          parent.$solitics.emit("VALIDATE_EMAIL", 0, customFields);
+          parent.$solitics.hidePopup();
+        }
+      };
     </script>
   </body>
 </html>
